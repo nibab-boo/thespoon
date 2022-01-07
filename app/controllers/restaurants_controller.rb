@@ -16,17 +16,23 @@ class RestaurantsController < ApplicationController
     # raise
     @restaurant = Restaurant.new(restaurant_params)
     @restaurant.save
-    redirect_to restaurant_path(@restaurant) # can /restaurant could be anything other than this.
+    redirect_to restaurant_path(@restaurant) # can /restaurant/:id could be anything other than this.
   end
 
   def edit
-    @restaurant = Restaurant.find(params[:id]);
+    @restaurant = Restaurant.find(params[:id])
   end
 
   def update
+    @restaurant = Restaurant.find(params[:id])
+    @restaurant.update(restaurant_params)
+    redirect_to restaurant_path(@restaurant) # can /restaurant/:id could be anything other than this.
   end
 
   def destroy
+    @restaurant = Restaurant.find(params[:id])
+    @restaurant.destroy
+    redirect_to restaurants_path
   end
 
   private
